@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Table from "./components/Table";
-import Filters from "./components/Filters";
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -37,8 +36,6 @@ export default function App() {
   return (
     <div style={{ padding: 20, fontFamily: "sans-serif" }}>
       <h1>GE Routes</h1>
-
-      <Filters minProfit={minProfit} setMinProfit={setMinProfit} />
 
       {loading ? <p>Loading money makers...</p> : <Table data={filtered} />}
     </div>

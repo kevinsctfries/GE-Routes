@@ -1,5 +1,7 @@
 import { SKILL_ICONS } from "../utils/skillIcons";
 
+import "./Table.css";
+
 function Requirements({ reqs }) {
   if (!reqs?.length) return <span className="req-empty">-</span>;
 

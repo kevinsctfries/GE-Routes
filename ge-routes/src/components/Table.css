@@ -1,0 +1,91 @@
+.table-wrapper {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  & .table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--secondary-bg);
+
+    & th {
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--muted);
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+
+    & td {
+      padding: 1rem;
+    }
+
+    & tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 50ms ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    & a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 50ms ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    & .table-profit {
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+
+    & .table-link {
+      display: inline-block;
+    }
+  }
+}
+
+.req-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  & .req-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background: rgba(96, 165, 250, 0.1);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+
+    & .req-text {
+      color: var(--text);
+    }
+
+    & .req-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.req-empty {
+  color: var(--muted);
+  font-weight: 500;
+}

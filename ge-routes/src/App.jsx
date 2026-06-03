@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Table from "./components/Table";
 
+import "./App.css";
+
 export default function App() {
   const [data, setData] = useState([]);
   const [minProfit, setMinProfit] = useState(0);
@@ -34,10 +36,12 @@ export default function App() {
     .sort((a, b) => (Number(b.profit) || 0) - (Number(a.profit) || 0));
 
   return (
-    <div style={{ padding: 20, fontFamily: "sans-serif" }}>
-      <h1>GE Routes</h1>
+    <div className="app-container">
+      <header className="header">GE Routes</header>
 
-      {loading ? <p>Loading money makers...</p> : <Table data={filtered} />}
+      <main>
+        {loading ? <p>Loading money makers...</p> : <Table data={filtered} />}
+      </main>
     </div>
   );
 }

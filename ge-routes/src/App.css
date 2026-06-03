@@ -1,0 +1,50 @@
+:root {
+  --bg: #0f1115;
+  --text: rgba(255, 255, 255, 0.96);
+  --muted: rgba(255, 255, 255, 0.72);
+  --border: rgba(255, 255, 255, 0.12);
+  --blue: #60a5fa;
+  --secondary-bg: #1a1f26;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-container {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+
+  & .header {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    padding: 20px 24px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  & main {
+    flex: 1;
+    padding: 24px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+
+    & p {
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: -0.2px;
+    }
+  }
+}

@@ -20,7 +20,6 @@ export default function App() {
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
   }
 
@@ -28,6 +27,7 @@ export default function App() {
   const [category, setCategory] = useState("all");
   const [intensity, setIntensity] = useState("all");
   const [playerStats, setPlayerStats] = useState(null);
+  const [hideIneligible, setHideIneligible] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -61,6 +61,7 @@ export default function App() {
       if (profit < minProfitNum) return false;
       if (category !== "all" && x.category !== category) return false;
       if (intensity !== "all" && x.intensity !== intensity) return false;
+      if (hideIneligible && playerStats && !x.eligibility?.canDo) return false;
       return true;
     })
     .sort((a, b) => (Number(b.profit) || 0) - (Number(a.profit) || 0));
@@ -68,20 +69,13 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}>
-          <div>GE Routes</div>
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label="Toggle theme">
-            {theme === "dark" ? "Dark" : "Light"}
-          </button>
-        </div>
+        <div>GE Routes</div>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label="Toggle theme">
+          {theme === "dark" ? "Dark" : "Light"}
+        </button>
       </header>
 
       <main className="layout">
@@ -95,6 +89,8 @@ export default function App() {
             setIntensity={setIntensity}
             playerStats={playerStats}
             setPlayerStats={setPlayerStats}
+            hideIneligible={hideIneligible}
+            setHideIneligible={setHideIneligible}
           />
         </aside>
 

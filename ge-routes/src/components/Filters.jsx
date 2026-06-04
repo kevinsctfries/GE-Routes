@@ -65,10 +65,24 @@ export default function Filters({
   setIntensity,
   playerStats,
   setPlayerStats,
+  hideIneligible,
+  setHideIneligible,
 }) {
   return (
     <div className="filters">
       <PlayerLookup playerStats={playerStats} setPlayerStats={setPlayerStats} />
+
+      {playerStats && (
+        <div className="filter-group filter-group--row">
+          <label htmlFor="hide-ineligible">Hide ineligible</label>
+          <input
+            id="hide-ineligible"
+            type="checkbox"
+            checked={hideIneligible}
+            onChange={e => setHideIneligible(e.target.checked)}
+          />
+        </div>
+      )}
 
       <div className="filter-group">
         <label>Min GP/hr</label>

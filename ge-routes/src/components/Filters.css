@@ -1,0 +1,50 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--panel);
+  border-radius: 0.5rem;
+}
+
+.player-lookup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.lookup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.player-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-stats-preview {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.error-message {
+  font-size: 0.875rem;
+  color: var(--error);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}

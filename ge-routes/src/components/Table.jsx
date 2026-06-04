@@ -68,7 +68,6 @@ export default memo(function Table({ data, playerStats }) {
             <th>Requirements</th>
             <th>Category</th>
             <th>Intensity</th>
-            {playerStats && <th className="eligibility-col">Status</th>}
           </tr>
         </thead>
 
@@ -99,16 +98,6 @@ export default memo(function Table({ data, playerStats }) {
 
               <td>{row.category}</td>
               <td>{row.intensity}</td>
-
-              {playerStats && (
-                <td className="eligibility-cell">
-                  {row.eligibility?.canDo ? (
-                    <span className="badge badge-accent">✓ Eligible</span>
-                  ) : (
-                    <span className="badge badge-error">✗ Missing</span>
-                  )}
-                </td>
-              )}
             </tr>
           ))}
         </tbody>

@@ -1,7 +1,7 @@
 .skill-panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 10px;
 }
 
@@ -46,10 +46,6 @@
   padding: 2px 4px;
 
   border-radius: 4px;
-}
-
-.skill-cell:hover {
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .skill-cell img {

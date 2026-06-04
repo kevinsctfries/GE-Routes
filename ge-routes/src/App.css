@@ -10,12 +10,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
+  padding: 0 2rem;
+  height: 64px;
   border-bottom: 1px solid var(--border);
   background: var(--panel);
-  font-size: 1.75rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-logo {
+  height: 2rem;
+  width: auto;
 }
 
 .theme-toggle {

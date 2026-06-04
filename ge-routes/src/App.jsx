@@ -69,7 +69,10 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <div>GE Routes</div>
+        <div className="header-brand">
+          <img src="/Logo.png" alt="GE Routes Logo" className="header-logo" />
+          <span>GE Routes</span>
+        </div>
         <button
           className="theme-toggle"
           onClick={toggleTheme}

@@ -35,7 +35,7 @@ export default function Filters({
         <select value={intensity} onChange={e => setIntensity(e.target.value)}>
           <option value="all">All</option>
           <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
+          <option value="Moderate">Moderate</option>
           <option value="High">High</option>
         </select>
       </div>

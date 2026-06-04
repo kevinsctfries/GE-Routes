@@ -1,7 +1,9 @@
-import { memo, useState } from "react";
+import { memo, useState, useMemo } from "react";
 import { SKILL_ICONS } from "../utils/skillIcons";
 
 import "./Table.css";
+
+const INTENSITY_ORDER = { Low: 1, Moderate: 2, High: 3 };
 
 const Requirements = memo(function Requirements({
   reqs,
@@ -36,7 +38,7 @@ const Requirements = memo(function Requirements({
           className="badge badge-error"
           onClick={() => setShowMissing(!showMissing)}
           title="Show missing requirements">
-          ⓘ {eligibility.missing.length} missing
+          {eligibility.missing.length} missing
         </button>
       )}
 
@@ -57,22 +59,82 @@ const Requirements = memo(function Requirements({
   );
 });
 
+function SortableHeader({ label, colKey, sortKey, onSort }) {
+  const active = sortKey === colKey;
+  return (
+    <th
+      className={`sortable ${active ? "active" : ""}`}
+      onClick={() => onSort(colKey)}>
+      {label}
+    </th>
+  );
+}
+
 export default memo(function Table({ data, playerStats }) {
+  const [sortKey, setSortKey] = useState("profit");
+  const [sortDir, setSortDir] = useState("desc");
+
+  function handleSort(key) {
+    if (sortKey === key) {
+      setSortDir(d => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir(key === "profit" ? "desc" : "asc");
+    }
+  }
+
+  const sorted = useMemo(() => {
+    return [...data].sort((a, b) => {
+      let cmp = 0;
+      switch (sortKey) {
+        case "name":
+          cmp = a.name.localeCompare(b.name);
+          break;
+        case "profit":
+          cmp = (Number(a.profit) || 0) - (Number(b.profit) || 0);
+          break;
+        case "category":
+          cmp = a.category.localeCompare(b.category);
+          break;
+        case "intensity":
+          cmp =
+            (INTENSITY_ORDER[a.intensity] || 0) -
+            (INTENSITY_ORDER[b.intensity] || 0);
+          break;
+      }
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+  }, [data, sortKey, sortDir]);
+
+  const headerProps = { sortKey, sortDir, onSort: handleSort };
+
   return (
     <div className="table-wrapper">
       <table className="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Profit/hr</th>
+            <SortableHeader label="Name" colKey="name" {...headerProps} />
+            <SortableHeader
+              label="Profit/hr"
+              colKey="profit"
+              {...headerProps}
+            />
             <th>Requirements</th>
-            <th>Category</th>
-            <th>Intensity</th>
+            <SortableHeader
+              label="Category"
+              colKey="category"
+              {...headerProps}
+            />
+            <SortableHeader
+              label="Intensity"
+              colKey="intensity"
+              {...headerProps}
+            />
           </tr>
         </thead>
 
         <tbody>
-          {data.map((row, i) => (
+          {sorted.map((row, i) => (
             <tr
               key={i}
               className={
@@ -83,11 +145,9 @@ export default memo(function Table({ data, playerStats }) {
                   {row.name}
                 </a>
               </td>
-
               <td className="table-profit">
                 {Number(row.profit).toLocaleString()}
               </td>
-
               <td>
                 <Requirements
                   reqs={row.requirements}
@@ -95,7 +155,6 @@ export default memo(function Table({ data, playerStats }) {
                   playerStats={playerStats}
                 />
               </td>
-
               <td>{row.category}</td>
               <td>{row.intensity}</td>
             </tr>

@@ -21,9 +21,19 @@
   border-bottom: 1px solid var(--border);
 }
 
-.table th.eligibility-col {
-  width: 10%;
-  text-align: center;
+.sort-icon.active {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.table th.sortable {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.table th.sortable:hover {
+  color: var(--text);
 }
 
 .table td {

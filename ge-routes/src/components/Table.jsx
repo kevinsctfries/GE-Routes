@@ -12,7 +12,9 @@ const Requirements = memo(function Requirements({ reqs }) {
         <div key={`${r.skill}-${i}`} className="req-item">
           <img src={SKILL_ICONS[r.skill]} alt={r.skill} className="req-icon" />
           <span className="req-text">
-            {r.skill} {r.level}
+            {["Total", "Quests"].includes(r.skill)
+              ? r.level
+              : `${r.skill} ${r.level}`}
           </span>
         </div>
       ))}

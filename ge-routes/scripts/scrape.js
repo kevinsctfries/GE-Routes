@@ -27,8 +27,30 @@ async function scrape() {
     const requirements = [];
 
     reqCell.find("span.scp").each((_, span) => {
-      const skill = $(span).attr("data-skill");
-      const level = $(span).attr("data-level");
+      let skill = $(span).attr("data-skill");
+      let level = $(span).attr("data-level");
+      const spanText = $(span).text().trim();
+
+      // Normalize skill names to match icon keys
+      if (skill === "Combat level") {
+        skill = "Combat";
+      } else if (skill === "Skills") {
+        skill = "Total";
+      } else if (skill === "Quest points") {
+        skill = "Quests";
+      }
+
+      if (level) {
+        level = level.replace(/\[\[(.+?)\]\]/g, "$1").trim();
+      }
+
+      if (!skill && spanText.includes("Combat")) {
+        skill = "Combat";
+        const match = spanText.match(/(\d+\+?)/);
+        if (match) {
+          level = match[1];
+        }
+      }
 
       if (skill && level) {
         requirements.push({
@@ -38,7 +60,12 @@ async function scrape() {
       }
     });
 
-    const reqRaw = reqCell.text().replace(/\s+/g, " ").trim();
+    const reqRaw = reqCell
+      .text()
+      .replace(/\s+/g, " ")
+      .replace(/([a-z])or\s/gi, "$1 or ")
+      .replace(/([a-z])and\s/gi, "$1 and ")
+      .trim();
 
     const category = $(cells[3]).text().trim();
 

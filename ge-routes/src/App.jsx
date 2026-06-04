@@ -78,32 +78,30 @@ export default function App() {
         </button>
       </header>
 
-      <div className="layout-scroll">
-        <main className="layout">
-          <aside className="sidebar">
-            <Filters
-              minProfit={minProfit}
-              setMinProfit={setMinProfit}
-              category={category}
-              setCategory={setCategory}
-              intensity={intensity}
-              setIntensity={setIntensity}
-              playerStats={playerStats}
-              setPlayerStats={setPlayerStats}
-              hideIneligible={hideIneligible}
-              setHideIneligible={setHideIneligible}
-            />
-          </aside>
+      <main className="layout">
+        <aside className="sidebar">
+          <Filters
+            minProfit={minProfit}
+            setMinProfit={setMinProfit}
+            category={category}
+            setCategory={setCategory}
+            intensity={intensity}
+            setIntensity={setIntensity}
+            playerStats={playerStats}
+            setPlayerStats={setPlayerStats}
+            hideIneligible={hideIneligible}
+            setHideIneligible={setHideIneligible}
+          />
+        </aside>
 
-          <section className="content">
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <Table data={filtered} playerStats={playerStats} />
-            )}
-          </section>
-        </main>
-      </div>
+        <section className="content">
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <Table data={filtered} playerStats={playerStats} />
+          )}
+        </section>
+      </main>
     </div>
   );
 }

@@ -1,11 +1,12 @@
 .app-container {
-  min-height: 100vh;
-  background: var(--bg);
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .header {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,8 +26,12 @@
   font-weight: 500;
 }
 
-.layout {
+.layout-scroll {
   flex: 1;
+  overflow-y: auto;
+}
+
+.layout {
   display: flex;
   gap: 24px;
   padding: 24px;
@@ -40,7 +45,7 @@
   width: 280px;
   flex-shrink: 0;
   position: sticky;
-  top: 24px;
+  top: 0;
   align-self: flex-start;
 }
 

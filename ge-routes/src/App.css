@@ -53,3 +53,27 @@
   flex: 1;
   min-width: 0;
 }
+
+.layout-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.layout-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.layout-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.layout-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+.layout-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}

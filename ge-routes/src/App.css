@@ -16,6 +16,7 @@ html,
 body {
   background: var(--bg);
   color: var(--text);
+  margin: 0;
 }
 
 .app-container {
@@ -36,15 +37,37 @@ body {
 
   & main {
     flex: 1;
+
+    display: flex;
+    gap: 24px;
+
     padding: 24px;
+
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
+
+    align-items: flex-start;
 
     & p {
       color: var(--muted);
       font-weight: 500;
       letter-spacing: -0.2px;
     }
+  }
+
+  & .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+
+    position: sticky;
+    top: 24px;
+
+    align-self: flex-start;
+  }
+
+  & .content {
+    flex: 1;
+    min-width: 0;
   }
 }

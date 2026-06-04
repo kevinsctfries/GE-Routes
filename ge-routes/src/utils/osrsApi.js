@@ -1,6 +1,4 @@
-// OSRS Hiscores API integration and parsing
-
-const HISCORES_API_DEV = "/api/hiscores"; // Proxied through Vite in development
+const HISCORES_API_DEV = "/api/hiscores";
 const HISCORES_API_PROD =
   "https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws";
 
@@ -33,9 +31,8 @@ const SKILL_NAMES = [
 ];
 
 /**
- * Fetch player stats from OSRS Hiscores API
- * @param {string} username - OSRS player username
- * @returns {Promise<Object>} - Object with skill names as keys and levels as values
+ * @param {string} username - player username
+ * @returns {Promise<Object>} - object with skill names as keys and levels as values
  */
 export async function fetchPlayerStats(username) {
   if (!username || username.trim().length === 0) {
@@ -43,7 +40,6 @@ export async function fetchPlayerStats(username) {
   }
 
   try {
-    // Use Vite proxy in development, direct API in production
     const apiUrl = import.meta.env.DEV ? HISCORES_API_DEV : HISCORES_API_PROD;
     const endpoint =
       apiUrl === HISCORES_API_DEV
@@ -58,7 +54,6 @@ export async function fetchPlayerStats(username) {
 
     const text = await response.text();
 
-    // Check if player was not found (empty response)
     if (text.trim().length === 0) {
       throw new Error(`Player "${username}" not found on Hiscores`);
     }
@@ -149,7 +144,6 @@ export function checkEligibility(playerStats, requirements) {
   requirements.forEach(req => {
     const requiredLevel = parseRequirementLevel(req.level);
 
-    // Skip optional requirements
     if (requiredLevel === null) {
       return;
     }

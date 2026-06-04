@@ -23,4 +23,7 @@ export const SKILL_ICONS = {
   Woodcutting: "/icons/Woodcutting_icon.png",
   Farming: "/icons/Farming_icon.png",
   Sailing: "/icons/Sailing_icon.png",
+  Combat: "/icons/Attack_style_icon.png",
+  Total: "/icons/Stats_icon.png",
+  Quests: "/icons/Quest_point_icon.png",
 };

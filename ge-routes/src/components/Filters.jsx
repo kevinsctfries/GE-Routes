@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { fetchPlayerStats } from "../utils/osrsApi";
+import SkillPanel from "./SkillPanel";
+
 import "./Filters.css";
 
 function PlayerLookup({ playerStats, setPlayerStats }) {
@@ -15,7 +17,6 @@ function PlayerLookup({ playerStats, setPlayerStats }) {
     try {
       const stats = await fetchPlayerStats(username);
       setPlayerStats(stats);
-      setUsername("");
     } catch (err) {
       setError(err.message);
       setPlayerStats(null);
@@ -24,44 +25,30 @@ function PlayerLookup({ playerStats, setPlayerStats }) {
     }
   };
 
-  const handleClear = () => {
-    setPlayerStats(null);
-    setUsername("");
-    setError(null);
-  };
-
   return (
     <div className="player-lookup">
       <label>Player Lookup</label>
 
-      {playerStats ? (
+      <form onSubmit={handleLookup} className="lookup-form">
+        <input
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="Enter username"
+          disabled={loading}
+        />
+        <button
+          type="submit"
+          className="btn-primary"
+          disabled={loading || !username.trim()}>
+          {loading ? "Loading..." : "Lookup"}
+        </button>
+      </form>
+
+      {playerStats && (
         <div className="player-info">
-          <div className="player-status">
-            <span className="badge badge-accent">✓ Loaded</span>
-            <button onClick={handleClear} className="btn-ghost-error">
-              Clear
-            </button>
-          </div>
-          <div className="player-stats-preview">
-            Overall: {playerStats.Overall}
-          </div>
+          <SkillPanel stats={playerStats} />
         </div>
-      ) : (
-        <form onSubmit={handleLookup} className="lookup-form">
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            placeholder="Enter username"
-            disabled={loading}
-          />
-          <button
-            type="submit"
-            className="btn-primary"
-            disabled={loading || !username.trim()}>
-            {loading ? "Loading..." : "Lookup"}
-          </button>
-        </form>
       )}
 
       {error && <div className="error-message">{error}</div>}

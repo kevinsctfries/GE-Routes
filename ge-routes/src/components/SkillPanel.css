@@ -1,0 +1,63 @@
+.skill-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 10px;
+}
+
+.overall-level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  font-weight: 700;
+  font-size: 1.2rem;
+
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.overall-level img {
+  width: 22px;
+  height: 22px;
+  image-rendering: pixelated;
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.skill-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  min-height: 24px;
+  padding: 2px 4px;
+
+  border-radius: 4px;
+}
+
+.skill-cell img {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+
+  image-rendering: pixelated;
+}
+
+.skill-cell span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+}

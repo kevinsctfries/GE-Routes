@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Table from "./components/Table";
 
 import "./App.css";
 
 export default function App() {
   const [data, setData] = useState([]);
-  const [minProfit, setMinProfit] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,7 +12,9 @@ export default function App() {
       try {
         setLoading(true);
 
-        const res = await fetch("/data.json");
+        const res = await fetch("/data.json", { 
+          cache: "force-cache" 
+        });
         const json = await res.json();
 
         setData(json);
@@ -28,12 +29,15 @@ export default function App() {
     load();
   }, []);
 
-  const filtered = data
-    .filter(x => {
-      const profit = Number(x.profit) || 0;
-      return profit >= minProfit;
-    })
-    .sort((a, b) => (Number(b.profit) || 0) - (Number(a.profit) || 0));
+  const filtered = useMemo(
+    () => data
+      .filter(x => {
+        const profit = Number(x.profit) || 0;
+        return profit >= 0;
+      })
+      .sort((a, b) => (Number(b.profit) || 0) - (Number(a.profit) || 0)),
+    [data]
+  );
 
   return (
     <div className="app-container">

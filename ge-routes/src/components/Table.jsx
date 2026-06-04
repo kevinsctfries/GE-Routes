@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { SKILL_ICONS } from "../utils/skillIcons";
 
 import "./Table.css";
 
-function Requirements({ reqs }) {
+const Requirements = memo(function Requirements({ reqs }) {
   if (!reqs?.length) return <span className="req-empty">-</span>;
 
   return (
@@ -17,9 +18,9 @@ function Requirements({ reqs }) {
       ))}
     </div>
   );
-}
+});
 
-export default function Table({ data }) {
+export default memo(function Table({ data }) {
   return (
     <div className="table-wrapper">
       <table className="table">
@@ -63,4 +64,4 @@ export default function Table({ data }) {
       </table>
     </div>
   );
-}
+});

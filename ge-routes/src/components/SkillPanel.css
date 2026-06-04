@@ -1,6 +1,6 @@
 .skill-panel {
-  background: var(--surface, #232323);
-  border: 1px solid var(--border, #444);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 10px;
 }
@@ -16,7 +16,7 @@
 
   margin-bottom: 10px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--border);
 }
 
 .overall-level img {
@@ -26,6 +26,12 @@
 }
 
 .skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.skill-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
